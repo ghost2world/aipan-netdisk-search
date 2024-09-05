@@ -1,8 +1,5 @@
 [
   {
-    "api": "/api/sources/aipan-search"
-  },
-  {
     "api": "/api/sources"
   },
   {
@@ -31,5 +28,8 @@
   },
   {
     "api": "/api/sources/indexI"
+  },
+  {
+    "api": "/api/sources/aipan-search"
   }
 ]
