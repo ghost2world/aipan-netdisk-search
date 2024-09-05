@@ -101,8 +101,9 @@ onMounted(async () => {
 
     <div class="py-2 h-25 fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-800 space-y-1">
       <div class="flex flex-row items-center justify-center  gap-3">
-        <a class="" href="https://www.xbtjx.xyz/">
-          <img class="w-5 h-5" src="https://axcdn.axurehub.com/wp-content/uploads/2024/08/4ef8946574bb90a.jpg" alt="小报童专栏精选站"><span>小报童专栏精选站</span>
+        <a class="" href="https://www.xbtjx.xyz/" style="display: contents;">
+          <img class="w-5 h-5" src="https://axcdn.axurehub.com/wp-content/uploads/2024/08/4ef8946574bb90a.jpg" alt="小报童专栏精选站">
+          <span>小报童专栏精选站</span>
         </a>
         
       </div>
