@@ -72,7 +72,7 @@ onMounted(async () => {
     </div>
     <div class="flex flex-row items-center justify-center gap-3 mt-[80px]">
       <img class="w-[40px] h-[40px] sm:w-[60px] sm:h-[60px]" src="@/assets/my-logo.png" alt="logo">
-      <h1 class="text-[18px] sm:text-[22px] font-serif font-bold dark:text-white ">爱盼-网盘资源搜索</h1>
+      <h1 class="text-[18px] sm:text-[22px] font-serif font-bold dark:text-white ">云盘搜索站-网盘资源搜索引擎</h1>
     </div>
     <div class="max-w-[1240px] mx-auto mt-[20px]">
       <div class="w-[80%] md:w-[700px] mx-auto">
