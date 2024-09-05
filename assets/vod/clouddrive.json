@@ -4,5 +4,8 @@
   },
   {
     "api": "/api/sources"
+  },
+  {
+    "api": "/api/sources/indexI"
   }
 ]
