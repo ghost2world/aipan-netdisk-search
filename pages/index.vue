@@ -43,18 +43,17 @@ onMounted(async () => {
     doubanData.value = doubanStore.doubanData
     doubanCache.value = 'exist'
   }
+
+  // 百度统计代码
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?97171b6e4c6a0fcb2b1e215c700886fe";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
 })
 </script>
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?97171b6e4c6a0fcb2b1e215c700886fe";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
 
 <template>
   <div class="bg-[#ffffff] dark:bg-gray-800  min-h-screen py-[60px]">
@@ -123,6 +122,7 @@ var _hmt = _hmt || [];
       </p>
     </div>
   </div>
+  
 </template>
 
 <style scoped>
