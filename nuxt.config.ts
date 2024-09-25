@@ -100,7 +100,7 @@ export default defineNuxtConfig({
         ],
     },
     plugins: [
-
+        '~/plugins/baidu.js'
     ],
     nitro: {
         devProxy: {
