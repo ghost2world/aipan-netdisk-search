@@ -22,6 +22,7 @@ const handleSearch = async () => {
     }).then(res => {
       if (res.list && res.list.length) {
         sources.value = sources.value.concat(res.list)
+        console.log(sources.value)
       } else {
         skeletonLoading.value = false
       }

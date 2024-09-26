@@ -11,7 +11,7 @@
     "start": "node .output/server/index.mjs"
   },
   "devDependencies": {
-    "@element-plus/nuxt": "^1.0.9",
+    "@element-plus/nuxt": "^1.0.10",
     "@nuxt/config": "^2.17.1",
     "@nuxt/devtools": "latest",
     "@nuxt/types": "^2.17.1",

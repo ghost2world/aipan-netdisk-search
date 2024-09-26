@@ -35,7 +35,90 @@ const goDouban = (movie) => {
   router.push({ path: '/search', query: { keyword: encodeURIComponent(movie.title) } })
 }
 
+// 分类
+const activeName = ref(0)
+const handleClick = (tab, event) => {
+  console.log(tab.paneName)
+  getResources(tab.paneName)
+}
+
+const resourceTypes = ref([])
+const getResoureTypesData = async () => {
+  const result = await $fetch('/api/resourcesType/get', {
+            method: 'POST'
+        })
+  const { code, data}  = result;
+  let all = {
+        "id": 0,
+        "name": "全部",
+        "description": null,
+        "creatorId": 1
+    }
+    data.unshift(all)
+  console.log(data)
+  if (code === 200) {
+    resourceTypes.value = data
+  }else {
+    resourceTypes.value = [{
+      id: 1,
+      name: '豆瓣热门影视榜单'
+    }]
+  }
+}
+
+// 资源
+const resourcesData = ref([])
+const page = ref(1)
+const pageSize = ref(50)
+const totalCount = ref(0)
+const getResources = async (typeId) => {
+    const res = await $fetch('/api/resources/get', {
+        method: 'GET',
+        query: {
+            page: page.value,
+            pageSize: pageSize.value,
+            typeId: typeId
+        }
+    })
+    resourcesData.value = res.resources;
+    totalCount.value = res.totalCount;
+    console.log(res.resources)
+    res.resources.map(
+      (item) => {
+        const links = JSON.parse(item.links)
+        console.log(links)
+        let linksArr = []
+        linksArr = links.map((link) => {
+                let service = '';
+                if (link.value) {
+                    if (link.value.includes('pan.baidu.com')) {
+                        service = 'BAIDU';
+                    } else if (link.value.includes('pan.xunlei.com')) {
+                        service = 'XUNLEI';
+                    } else if (link.value.includes('pan.quark.cn')) {
+                        service = 'QUARK';
+                    } else if (link.value.includes('www.aliyundrive.com')) {
+                        service = 'ALIYUN'
+                    } else {
+                        service = 'OTHER';
+                    }
+                }
+
+                return {
+                    pwd: "",
+                    link: link.value,
+                    service
+                };
+            })
+            item.linksArr = linksArr
+            return item
+      }
+    )
+}
+
 onMounted(async () => {
+  getResoureTypesData();
+  getResources();
   if (doubanCache.value === 'exist') {
     doubanData.value = doubanStore.doubanData
   } else {
@@ -44,14 +127,6 @@ onMounted(async () => {
     doubanCache.value = 'exist'
   }
 
-  // 百度统计代码
-  var _hmt = _hmt || [];
-  (function() {
-    var hm = document.createElement("script");
-    hm.src = "https://hm.baidu.com/hm.js?97171b6e4c6a0fcb2b1e215c700886fe";
-    var s = document.getElementsByTagName("script")[0]; 
-    s.parentNode.insertBefore(hm, s);
-  })();
 })
 </script>
 
@@ -93,7 +168,40 @@ onMounted(async () => {
       </div>
     </div>
     <div class="mx-5 xl:max-w-[1200px] xl:mx-auto mt-12 mb-[100px]" v-if="doubanData.length > 0">
-      <h1 class="text-[12px] sm:text-sm text-slate-600 font-bold dark:text-white mt-[20px]">豆瓣热门影视榜单</h1>
+      <div>
+        <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
+          <el-tab-pane v-for="(resourceType, index) in resourceTypes" :key="index" :label="resourceType.name" :name="resourceType.id">
+            <div class="mt-6">
+            <el-table :data="resourcesData.flat(Infinity)">
+                <el-table-column prop="name" label="资源名字"></el-table-column>
+                <el-table-column prop="type.name" label="分类"></el-table-column>
+                <el-table-column label="链接">
+                    <template #default="scope">
+                      <div v-for="(link,i) in scope.row.linksArr" :key="i">
+                        <nuxt-link class="flex flex-row items-center p-1 bg-slate-200 rounded gap-2 hover:bg-slate-300 dark:bg-gray-700 dark:hover:bg-gray-600"
+                                  :to="link.link"
+                                  target="_blank">
+                          <img class="w-[20px]" v-if="link.service === 'ALIYUN'" src="@/assets/netdisk/aliyun.png" alt="aliyun">
+                          <img class="w-[20px]" v-if="link.service === 'QUARK'" src="@/assets/netdisk/quark.png" alt="quark">
+                          <img class="w-[20px]" v-if="link.service === 'BAIDU'" src="@/assets/netdisk/baidu.png" alt="baidu">
+                          <img class="w-[20px]" v-if="link.service === 'XUNLEI'" src="@/assets/netdisk/xunlei.png" alt="xunlei">
+                          <img class="w-[20px]" v-if="link.service === 'OTHER'" src="@/assets/netdisk/xunlei.png" alt="xunlei">
+                          <span class="dark:text-white" v-if="link.pwd">提取码：{{ link.pwd }}</span>
+                        </nuxt-link>
+                      </div>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <!-- <div class="mt-6 flex items-center justify-center">
+                <el-pagination v-model:current-page="page" v-model:page-size="pageSize"
+                    :page-sizes="[100, 200, 300, 400]" background layout="total, sizes, prev, pager, next, jumper"
+                    :total="totalCount" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
+            </div> -->
+        </div>
+          </el-tab-pane>
+        </el-tabs>
+      </div>
+      <!-- <h1 class="text-[12px] sm:text-sm text-slate-600 font-bold dark:text-white mt-[20px]">豆瓣热门影视榜单</h1>
       <div class="grid grid-cols-2 xs:grid-cols-3 md:grid-cols-5 lg:grid-cols-5 xl:grid-cols-8  gap-3  mt-[10px]">
         <div
           class="mx-1 cursor-pointer truncate text-xs font-bold dark:bg-slate-700 dark:text-slate-100 rounded-[5px] p-2"
@@ -105,7 +213,7 @@ onMounted(async () => {
             {{ movie.rate }}
           </p>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div class="py-2 h-25 fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-800 space-y-1">
@@ -129,4 +237,5 @@ onMounted(async () => {
 :deep(.el-input__wrapper.is-focus) {
   --el-input-focus-border-color: #6648ff;
 }
+
 </style>

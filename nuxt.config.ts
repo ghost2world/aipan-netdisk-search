@@ -39,7 +39,7 @@ export default defineNuxtConfig({
                     src: 'https://challenges.cloudflare.com/turnstile/v0/api.js'
                 },
                 {
-                    src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=',
+                    src: 'https://hm.baidu.com/hm.js?97171b6e4c6a0fcb2b1e215c700886fe',
                     async: true,
                     crossorigin: 'anonymous'
                 }
