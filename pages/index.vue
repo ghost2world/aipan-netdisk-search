@@ -126,7 +126,10 @@ onMounted(async () => {
     doubanData.value = doubanStore.doubanData
     doubanCache.value = 'exist'
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 })
 </script>
 
@@ -230,7 +233,6 @@ onMounted(async () => {
       </p>
     </div>
   </div>
-  
 </template>
 
 <style scoped>
