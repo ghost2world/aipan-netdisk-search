@@ -67,7 +67,7 @@ const getResoureTypesData = async () => {
 // 资源
 const resourcesData = ref([])
 const page = ref(1)
-const pageSize = ref(2)
+const pageSize = ref(20)
 const totalCount = ref(0)
 const getResources = async (typeId) => {
     const res = await $fetch('/api/resources/get', {
