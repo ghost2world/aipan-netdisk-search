@@ -38,11 +38,11 @@ export default defineNuxtConfig({
                 {
                     src: 'https://challenges.cloudflare.com/turnstile/v0/api.js'
                 },
-                {
-                    src: 'https://hm.baidu.com/hm.js?97171b6e4c6a0fcb2b1e215c700886fe',
-                    async: true,
-                    crossorigin: 'anonymous'
-                }
+                // {
+                //     src: 'https://hm.baidu.com/hm.js?97171b6e4c6a0fcb2b1e215c700886fe',
+                //     async: true,
+                //     crossorigin: 'anonymous'
+                // }
             ]
 
         }
