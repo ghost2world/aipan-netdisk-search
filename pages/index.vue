@@ -126,10 +126,7 @@ onMounted(async () => {
     doubanData.value = doubanStore.doubanData
     doubanCache.value = 'exist'
   }
-<<<<<<< HEAD
 
-=======
->>>>>>> master
 })
 </script>
 
