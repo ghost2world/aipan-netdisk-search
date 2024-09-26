@@ -67,7 +67,7 @@ const getResoureTypesData = async () => {
 // 资源
 const resourcesData = ref([])
 const page = ref(1)
-const pageSize = ref(50)
+const pageSize = ref(20)
 const totalCount = ref(0)
 const getResources = async (typeId) => {
     const res = await $fetch('/api/resources/get', {
@@ -188,11 +188,11 @@ onMounted(async () => {
                     </template>
                 </el-table-column>
             </el-table>
-            <!-- <div class="mt-6 flex items-center justify-center">
+            <div class="mt-6 flex items-center justify-center">
                 <el-pagination v-model:current-page="page" v-model:page-size="pageSize"
                     :page-sizes="[100, 200, 300, 400]" background layout="total, sizes, prev, pager, next, jumper"
                     :total="totalCount" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
-            </div> -->
+            </div>
         </div>
           </el-tab-pane>
         </el-tabs>
