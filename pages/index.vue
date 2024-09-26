@@ -38,7 +38,6 @@ const goDouban = (movie) => {
 // 分类
 const activeName = ref(0)
 const handleClick = (tab, event) => {
-  console.log(tab.paneName)
   getResources(tab.paneName)
 }
 
@@ -55,7 +54,6 @@ const getResoureTypesData = async () => {
         "creatorId": 1
     }
     data.unshift(all)
-  console.log(data)
   if (code === 200) {
     resourceTypes.value = data
   }else {
@@ -82,11 +80,9 @@ const getResources = async (typeId) => {
     })
     resourcesData.value = res.resources;
     totalCount.value = res.totalCount;
-    console.log(res.resources)
     res.resources.map(
       (item) => {
         const links = JSON.parse(item.links)
-        console.log(links)
         let linksArr = []
         linksArr = links.map((link) => {
                 let service = '';
