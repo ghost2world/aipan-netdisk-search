@@ -37,7 +37,9 @@ const goDouban = (movie) => {
 
 // 分类
 const activeName = ref(0)
+const typeId = ref(0)
 const handleClick = (tab, event) => {
+  typeId.value = tab.paneName
   getResources(tab.paneName)
 }
 
@@ -114,11 +116,11 @@ const getResources = async (typeId) => {
 
 const handleCurrentChange = (val) => {
     page.value = val
-    getResources()
+    getResources(typeId.value)
 }
 const handleSizeChange = (val) => {
     pageSize.value = val
-    getResources()
+    getResources(typeId.value)
 }
 
 onMounted(async () => {
