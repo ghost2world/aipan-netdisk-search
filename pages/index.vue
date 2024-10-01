@@ -165,6 +165,9 @@ onMounted(async () => {
       <img class="w-[40px] h-[40px] sm:w-[60px] sm:h-[60px]" src="@/assets/my-logo.png" alt="logo">
       <h1 class="text-[18px] sm:text-[22px] font-serif font-bold dark:text-white ">盘搜搜-网盘资源搜索引擎</h1>
     </div>
+    <p class="text-center text-[12px] sm:text-[14px] text-slate-600 dark:text-slate-300 mt-2">
+      可搜索短剧、电影、电视剧、动漫、综艺、电子书、课程、素材、小说、动画片等海量资源
+    </p>
     <div class="max-w-[1240px] mx-auto mt-[20px]">
       <div class="w-[80%] md:w-[700px] mx-auto">
         <client-only>
